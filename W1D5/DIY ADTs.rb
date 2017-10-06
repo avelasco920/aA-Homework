@@ -6,7 +6,7 @@ class Stack
   end
 
   def add(el)
-    arr << el
+    arr << el unless arr.include?(el)
   end
 
   def remove
@@ -50,25 +50,28 @@ end
 
 
 class Map
-  attr_accessor :hash
+  attr_accessor :arr
 
   def initialize
-    @hash = Hash.new(nil)
+    @arr = Array.new
   end
 
-  def add(term, definition)
-    hash[term] = definition
+  def assign(key, value)
+    remove(key) if term_exist?(key)
+    arr << [key, value]
   end
 
-  def remove(term)
-    hash.delete(term)
+  def term_exist?(term)
+    arr.each { |set| return true if set[0] == term }
   end
 
-  def delete(term)
-    hash.delete(term)
+  def remove(key)
+    arr.each do |el|
+      arr.delete(el) if el[0] == key
+    end
   end
 
   def show
-    hash
+    arr
   end
 end
