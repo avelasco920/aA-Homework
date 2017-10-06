@@ -65,6 +65,10 @@ class Map
     arr.each { |set| return true if set[0] == term }
   end
 
+  def lookup(key)
+    arr.each { |set| return set[1] if set[0] == key }
+  end
+
   def remove(key)
     arr.each do |el|
       arr.delete(el) if el[0] == key
