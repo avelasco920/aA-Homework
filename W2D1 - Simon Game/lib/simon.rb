@@ -64,7 +64,4 @@ class Simon
     @game_over = false
     @seq = []
   end
-end
-# 
-# game = Simon.new
-# game.play
+e
