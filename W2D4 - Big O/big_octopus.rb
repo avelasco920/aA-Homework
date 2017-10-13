@@ -54,7 +54,7 @@ def fast_dance(dir, hash)
   hash.key(dir)
 end
 
-# 
+#
 # dance_hash = {
 #   1 => "up", 2 => "right-up", 3 => "right",
 #   4 => "right-down", 5 => "down",
