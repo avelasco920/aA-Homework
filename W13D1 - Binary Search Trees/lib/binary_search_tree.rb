@@ -14,15 +14,14 @@ class BinarySearchTree
     new_node = BSTNode.new(value)
     @root ||= new_node
     if value > @root.value && !root.right
-      return root.right = new_node
-    elsif value <= root.value && !root.left
-      return root.left = new_node
-    else
-      insert(value)
+      return @root.right=(new_node)
+    elsif value <= @root.value && !root.left
+      return @root.left=(new_node)
     end
   end
 
   def find(value, tree_node = @root)
+    
   end
 
   def delete(value)
