@@ -33,20 +33,39 @@ class BinarySearchTree
 
   def delete(value)
     @root = nil if @root.value == value && @root.has_no_children
-    
-    node_to_delete = find(value)
-    if node_to_delete && node_to_delete.has_no_children
-      node_to_delete = node_to_delete.remove
+    node = find(value)
+    if !node
+      return nil
+    elsif node.has_no_children
+      node.replace_with(nil)
+    elsif node.num_children == 1
+      child_node = node.only_child
+      @root = child_node if child_node.is_root
+      node.replace_with(child_node)
+    elsif node.num_children == 2
+      max_node = maximum(node.left)
+      child_node = max_node.only_child
+      max_node.replace_with(child_node)
+      @root = max_node if max_node.is_root
+      node.replace_with(max_node)
     end
   end
 
+
   # helper method for #delete:
+
   def maximum(tree_node = @root)
     return tree_node if !tree_node.right
     maximum(tree_node.right)
   end
 
   def depth(tree_node = @root)
+    return 0 if !tree_node
+    return 0 if tree_node.has_no_children && tree_node.is_root
+    return 1 if tree_node.has_no_children
+    count = depth(tree_node.right) + 1 if tree_node.right
+    count = depth(tree_node.left) + 1 if tree_node.left
+    count
   end
 
   def remove?(tree_node = @root)
@@ -58,7 +77,4 @@ class BinarySearchTree
 
   private
   # optional helper methods go here:
-  def has_no_children(node)
-
-  end
 end

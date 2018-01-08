@@ -9,11 +9,11 @@ class BSTNode
     @parent
   end
 
-  def remove
+  def replace_with(new_node)
     if @value > @parent.value
-      @parent.right = nil
+      @parent.right = new_node
     elsif @value <= @parent.value
-      @parent.left = nil
+      @parent.left = new_node
     end
   end
 
@@ -47,6 +47,30 @@ class BSTNode
     !self.right && !self.left
   end
 
+  def num_children
+    count = 0
+    count += 1 if @right
+    count += 1 if @left
+    count
+  end
+
+  def only_child
+    return @right if @right
+    @left
+  end
+
+  def is_root
+    !@parent
+  end
+
+  def children
+    children = []
+    children << @right if @right
+    children << @left if @left
+    children
+  end
+
+
   # def left=(child_node)
   #   @left = child_node
   #   child_node.parent = self
@@ -56,4 +80,5 @@ class BSTNode
   #   @right = child_node
   #   child_node.parent = self
   # end
+
 end
