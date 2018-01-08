@@ -15,6 +15,7 @@ class BinarySearchTree
     if @root.nil?
       @root = new_node
     else
+      @root.tree = self
       @root.insert(new_node)
     end
   end
@@ -68,10 +69,21 @@ class BinarySearchTree
     count
   end
 
+  def is_balanced?(tree_node = @root)
+    return true if depth(tree_node) <= 1
+    (depth(tree_node.right) - depth(tree_node.left)).abs <= 1 &&
+      is_balanced?(tree_node.left) &&
+      is_balanced?(tree_node.right)
+  end
+
   def remove?(tree_node = @root)
   end
 
   def in_order_traversal(tree_node = @root, arr = [])
+    in_order_traversal(tree_node.left, arr) if tree_node.left
+    arr << tree_node.value
+    in_order_traversal(tree_node.right, arr) if tree_node.right
+    arr
   end
 
 

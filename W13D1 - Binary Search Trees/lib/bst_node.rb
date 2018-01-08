@@ -1,6 +1,6 @@
 class BSTNode
   attr_reader :value
-  attr_accessor :right, :left, :parent
+  attr_accessor :right, :left, :parent, :tree
 
   def initialize(value)
     @value = value
@@ -69,16 +69,4 @@ class BSTNode
     children << @left if @left
     children
   end
-
-
-  # def left=(child_node)
-  #   @left = child_node
-  #   child_node.parent = self
-  # end
-  #
-  # def right=(child_node)
-  #   @right = child_node
-  #   child_node.parent = self
-  # end
-
 end
