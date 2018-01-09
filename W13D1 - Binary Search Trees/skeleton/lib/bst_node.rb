@@ -25,24 +25,6 @@ class BSTNode
     end
   end
 
-  def set_right(node)
-    if @right
-      @right.insert(node)
-    else
-      @right = node
-      node.parent = self
-    end
-  end
-
-  def set_left(node)
-    if @left
-      @left.insert(node)
-    else
-      @left = node
-      node.parent = self
-    end
-  end
-
   def has_no_children
     !self.right && !self.left
   end
@@ -68,5 +50,25 @@ class BSTNode
     children << @right if @right
     children << @left if @left
     children
+  end
+
+  private
+
+  def set_right(node)
+    if @right
+      @right.insert(node)
+    else
+      @right = node
+      node.parent = self
+    end
+  end
+
+  def set_left(node)
+    if @left
+      @left.insert(node)
+    else
+      @left = node
+      node.parent = self
+    end
   end
 end
