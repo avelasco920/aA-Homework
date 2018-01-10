@@ -11,13 +11,23 @@ def topological_sort(vertices)
   until queue.empty?
     current = queue.shift
     sorted.push(current)
-    current.out_edges.each do |edge|
-      if edge.to_vertex.in_edges.length == 1
-        queue.push(edge.to_vertex)
-      end
+    # current.out_edges.each do |edge|
+    #   if edge.to_vertex.in_edges.length == 1
+    #     queue.push(edge.to_vertex)
+    #   end
+    #   edge.destroy!
+    # end
+
+    until current.out_edges.empty?
+      edge = current.out_edges.first
+      to_vertex = edge.to_vertex
       edge.destroy!
+
+      if to_vertex.in_edges.empty?
+        queue << to_vertex
+      end
     end
   end
-  # p sorted.map { |vertex| vertex.value }
-  p sorted
+  return [] if sorted.length < vertices.length
+  sorted
 end
